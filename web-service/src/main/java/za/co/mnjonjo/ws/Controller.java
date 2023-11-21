@@ -1,4 +1,4 @@
-package za.co.mnjonjo.web.service;
+package za.co.mnjonjo.ws;
 
 /**
  * @author Noxolo.Mkhungo
