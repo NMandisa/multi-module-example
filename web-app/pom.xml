@@ -90,6 +90,15 @@
           <artifactId>maven-war-plugin</artifactId>
           <version>3.2.2</version>
           <configuration>
+            <webResources>
+              <resource>
+                <directory>${project.build.directory}</directory>
+                <targetPath>WEB-INF</targetPath>
+                <!--<includes>
+                  <include>release.txt</include>
+                </includes>-->
+              </resource>
+            </webResources>
             <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
             <webXml>${basedir}/src/main/webapp/WEB-INF</webXml>
           </configuration>

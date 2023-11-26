@@ -19,13 +19,12 @@ import java.util.logging.Logger;
 public class HomePageController {
 
     private final static Logger LOGGER = Logger.getLogger(HomePageController.class.getName());
-
-    private TestService testService;
+    /*private TestService testService;
     @Autowired
     @Qualifier("testService")
     public void setTestService (TestService testService){
         this.testService=testService;
-    }
+    }*/
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index (HttpServletRequest httpRequest){
