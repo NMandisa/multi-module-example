@@ -24,7 +24,6 @@
         <module>core</module>
         <module>common</module>
         <module>web-app</module>
-        <module>web-service</module>
     </modules>
 
     <dependencies>

@@ -19,18 +19,20 @@ import java.util.logging.Logger;
 public class HomePageController {
 
     private final static Logger LOGGER = Logger.getLogger(HomePageController.class.getName());
-    /*private TestService testService;
+
+    private TestService testService;
     @Autowired
     @Qualifier("testService")
     public void setTestService (TestService testService){
         this.testService=testService;
-    }*/
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index (HttpServletRequest httpRequest){
         ModelAndView modelAndView = new ModelAndView("index");
         LOGGER.log(Level.INFO,"------>>>>>>>>> ",HomePageController.class);
         modelAndView.addObject("message", "You're in Home Page Controller");
+        modelAndView.addObject("tests", testService.testList());
         LOGGER.log(Level.INFO,"You're in Home Page Controller",HomePageController.class);
         return modelAndView;
     }
