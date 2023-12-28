@@ -1,11 +1,10 @@
 package za.co.mnjonjo.core;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import za.co.mnjonjo.core.utils.SpringUtil;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Hello world!
@@ -13,12 +12,11 @@ import java.util.logging.Logger;
  */
 public class App 
 {
-    private final static Logger LOGGER = Logger.getLogger(App.class.getName());
+    private final static Logger LOGGER = LoggerFactory.getLogger(App.class.getName());
     public static void main( String[] args )
     {
-        LOGGER.log(Level.INFO,"Initializing Spring context.", App.class);
-        SpringUtil springUtil =new SpringUtil();
+        LOGGER.debug("Initializing Spring context.", App.class);
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/core-context.xml");
-        springUtil.setApplicationContext(applicationContext);
+        LOGGER.debug(applicationContext.getBean("testRepository").toString());
     }
 }

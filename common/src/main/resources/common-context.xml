@@ -9,8 +9,14 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:annotation-config/>
     <context:property-placeholder location="classpath:./common.properties"/>
     <context:component-scan  base-package="za.co.mnjonjo.common" />
 
+    <context:component-scan base-package="za.co.mnjonjo.core.repository">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+    </context:component-scan>
 
+    <bean id="testService" class="za.co.mnjonjo.common.service.TestService"/>
+    <bean id="testFacade" class="za.co.mnjonjo.common.facade.TestFacade"/>
 </beans>

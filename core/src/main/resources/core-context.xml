@@ -12,11 +12,13 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:annotation-config/>
+    <context:component-scan base-package="za.co.mnjonjo.core"/>
     <context:property-placeholder location="classpath:./core.properties"/>
     <context:component-scan base-package="za.co.mnjonjo.core.repository">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
     </context:component-scan>
-    <jpa:repositories base-package="za.co.mnjonjo.core.repository" entity-manager-factory-ref="sessionFactory" transaction-manager-ref="transactionManager"/>
+    <jpa:repositories base-package="za.co.mnjonjo.core.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager"/>
 
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"  destroy-method="close">
         <constructor-arg ref="hikariConfig" />
@@ -26,9 +28,7 @@
         <property name="poolName" value="${hikari.config.poolName}" />
         <property name="connectionTestQuery" value="${hikari.config.connectionTestQuery}" />
         <property name="dataSourceClassName" value="${hikari.config.dataSourceClassName}" />
-        <property name="autoCommit" value="true"/>
-        <!--<property name="transactionIsolation" value=""/>
-        <property name="threadFactory" value="" />-->
+        <property name="autoCommit" value="false"/>
         <property name="dataSourceProperties">
             <props>
                 <prop key="url">${hikari.config.dataSource.url}</prop>
@@ -38,11 +38,15 @@
         </property>
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="za.co.mnjonjo.core.entity" />
-        <property name="hibernateProperties">
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+        <property name="jpaProperties">
             <props>
+                <prop key="jpa.show_sql">true</prop>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
                 <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
@@ -56,9 +60,11 @@
         </property>
     </bean>
 
-    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
+
+    <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
     <!--<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
     </bean>-->

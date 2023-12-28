@@ -7,6 +7,6 @@ import za.co.mnjonjo.core.entity.Test;
 /**
  * @author Noxolo.Mkhungo
  */
-@Repository("testRepository")
+@Repository
 public interface TestRepository extends JpaRepository<Test,Long> {
 }
