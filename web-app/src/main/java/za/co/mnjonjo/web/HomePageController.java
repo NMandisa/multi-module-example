@@ -21,6 +21,7 @@ public class HomePageController {
 
     private TestService testService;
     @Autowired
+    @Qualifier("testService")
     public void setTestService (TestService testService){
         this.testService=testService;
     }

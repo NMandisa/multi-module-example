@@ -12,11 +12,6 @@
     <listener-class>org.springframework.web.context.ContextLoader</listener-class>
   </listener>
 
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:/common-context.xml</param-value>
-  </context-param>
-
   <servlet>
     <!-- Provide a Servlet Name	-->
     <servlet-name>dispatcher</servlet-name>

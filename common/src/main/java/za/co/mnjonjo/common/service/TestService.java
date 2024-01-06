@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import za.co.mnjonjo.common.facade.TestFacade;
 import za.co.mnjonjo.core.entity.Test;
@@ -14,10 +15,12 @@ import java.util.List;
  * @author Noxolo.Mkhungo
  */
 @Service
+@Scope("singleton")
 public class TestService {
     private final static Logger LOGGER = LoggerFactory.getLogger(TestService.class.getName());
     private TestFacade testFacade;
     @Autowired
+    @Qualifier("testFacade")
     public void setTestFacade(TestFacade testFacade) {
         this.testFacade =  testFacade;
     }

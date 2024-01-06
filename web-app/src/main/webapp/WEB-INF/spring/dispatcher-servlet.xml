@@ -12,8 +12,8 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <import resource="classpath*:META-INF/common-context.xml"/>
     <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" cache-period="31556926" />
-
     <context:component-scan  base-package="za.co.mnjonjo.web" />
     <mvc:annotation-driven />
     <bean id="templateResolver" class="org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver">
