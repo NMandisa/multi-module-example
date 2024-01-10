@@ -9,8 +9,6 @@
 
   <groupId>za.co.mnjonjo.common</groupId>
   <artifactId>common</artifactId>
-  <!--<version>${project.parent.version}</version>-->
-
   <name>common</name>
 
   <properties>
@@ -26,20 +24,26 @@
   </dependencies>
 
   <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>za.co.mnjonjo.common.CommonApp</mainClass>
-            </manifest>
-          </archive>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-      </plugin>
-    </plugins>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <outputDirectory>${project.build.directory}/target</outputDirectory>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+    </testResources>
   </build>
+  <developers>
+    <developer>
+      <id>NMMkhungo</id>
+      <name>Noxolo Mkhungo</name>
+      <email>noxolomandisamkhungo@gmail.com</email>
+      <timezone>+2</timezone>
+    </developer>
+  </developers>
 </project>
