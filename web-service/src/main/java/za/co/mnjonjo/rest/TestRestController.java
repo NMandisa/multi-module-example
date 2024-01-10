@@ -2,7 +2,6 @@ package za.co.mnjonjo.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import za.co.mnjonjo.common.service.TestService;
 import za.co.mnjonjo.rest.constant.RestURIConstants;
 import za.co.mnjonjo.rest.dto.TestDTO;
+import za.co.mnjonjo.rest.response.TestResponse;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -41,7 +41,8 @@ public class TestRestController {
     public ResponseEntity <?> create(@RequestBody TestDTO testDTO){
         Map< String, Object > response= new LinkedHashMap<>();
         response.put("status",1);
-        response.put("create","create-test");
+        response.put("message","test created");
+        response.put("test", new TestResponse(testDTO.getName()));
         return new ResponseEntity<>(response,null, HttpStatus.CREATED);
     }
     @PostMapping(value = RestURIConstants.GET_TEST,produces = {MediaType.APPLICATION_JSON_VALUE})
