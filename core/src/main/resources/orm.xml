@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+    <package>za.co.mnjonjo.core.entity</package>
+    <!--Reference Purposes -->
+        <!--<entity class="za.co.mnjonjo.core.entity.Test" name="Test">
+            <named-native-query name="myQuery" result-set-mapping="ages">
+                <query>Query here</query>
+            </named-native-query>
+            <sql-result-set-mapping name="ages">
+                <column-result name="age" />
+            </sql-result-set-mapping>
+
+            <named-entity-graph name="test-entity-graph">
+                <named-attribute-node name="myNode" />
+            </named-entity-graph>
+        </entity>-->
+</entity-mappings>
