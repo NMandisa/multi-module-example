@@ -1,12 +1,12 @@
-package za.co.mnjonjo.rest;
+package za.co.mnjonjo.rest.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import za.co.mnjonjo.common.service.TestService;
 import za.co.mnjonjo.rest.constant.RestURIConstants;
@@ -20,20 +20,19 @@ import java.util.Map;
  * @author Noxolo.Mkhungo
  */
 @CrossOrigin(allowedHeaders = {"*"}, origins = "*")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(RestURIConstants.TESTS_REST_MAPPING)
 public class TestRestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TestRestController.class.getName());
     private final @NonNull TestService testService;
-    public TestRestController (@Validated TestService testService)
-    { this.testService=testService;}
 
     @GetMapping(value = RestURIConstants.GET_ALL_TESTS, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> list (){
         LOGGER.debug("Test ............");
         Map< String, Object > response= new LinkedHashMap<>();
         response.put("status",1);
-        response.put("tests","[]");
+        response.put("tests",testService.testList());
         return new ResponseEntity<>(response,null, HttpStatus.ACCEPTED);
     }
     @PostMapping(value = RestURIConstants.CREATE_TEST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},

@@ -15,14 +15,12 @@
     <mvc:annotation-driven />
     <context:component-scan base-package="za.co.mnjonjo.rest" />
     <import resource="classpath:META-INF/common-context.xml" />
-
     <!-- Message bundle -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basenames" >
             <list>
                 <value>/WEB-INF/messages/exception-message.properties</value>
             </list>
-
         </property>
     </bean>
     <!-- locale -->
@@ -39,8 +37,8 @@
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
-                <ref bean="jsonMessageConverter" />
                 <ref bean="xmlMessageConverter" />
+                <ref bean="jsonMessageConverter" />
             </list>
         </property>
     </bean>

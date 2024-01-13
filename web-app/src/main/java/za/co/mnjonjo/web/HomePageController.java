@@ -1,13 +1,11 @@
 package za.co.mnjonjo.web;
 
-import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import za.co.mnjonjo.common.service.TestService;
 
@@ -15,25 +13,15 @@ import za.co.mnjonjo.common.service.TestService;
  * @author Noxolo.Mkhungo
  */
 @Controller
+@RequiredArgsConstructor
 public class HomePageController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HomePageController.class.getName());
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(HomePageController.class.getName());
-
-    private TestService testService;
-    @Autowired
-    @Qualifier("testService")
-    public void setTestService (TestService testService){
-        this.testService=testService;
+    private final @NonNull TestService testService;
+    @GetMapping
+    public ModelAndView index (){
+        return new ModelAndView("index");
     }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index (HttpServletRequest httpRequest){
-        ModelAndView modelAndView = new ModelAndView("index");
-        LOGGER.debug("------>>>>>>>>> ",HomePageController.class);
-        modelAndView.addObject("message", "You're in Home Page Controller");
-        modelAndView.addObject("tests", testService.testList());
-        LOGGER.debug("You're in Home Page Controller",HomePageController.class);
-        return modelAndView;
-    }
+    //use the web service to access data via AJAX calls ("/web-service/api/v1/tests/")
 
 }
