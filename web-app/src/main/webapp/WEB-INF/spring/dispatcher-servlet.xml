@@ -14,6 +14,8 @@
 
     <import resource="classpath*:META-INF/common-context.xml"/>
     <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" cache-period="31556926" />
+    <mvc:resources mapping="/static/**" location="/WEB-INF/resources/static/" cache-period="31556926" />
+    <mvc:resources mapping="/theme/**" location="/WEB-INF/resources/theme/" cache-period="31556926" />
     <context:component-scan  base-package="za.co.mnjonjo.web" />
     <mvc:annotation-driven />
     <bean id="templateResolver" class="org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver">
