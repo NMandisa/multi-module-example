@@ -6,7 +6,14 @@
 <!--Navigation HTML-->
 <body>
 <div class="container">
-  Specific Exception Page
+  <h1>Internal Server Error</h1>
+  <h3>Cause : <span th:text="${cause}"></span></h3>
+  <h3 th:text="${message}"></h3>
+  <div>
+    <h3>Trace</h3>
+    <br/>
+    <p th:text="${trace}"></p>
+  </div>
 </div>
 </body>
 <!--Footer HTML-->

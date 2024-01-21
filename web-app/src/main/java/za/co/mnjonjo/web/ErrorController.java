@@ -10,35 +10,24 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class ErrorController {
-    @GetMapping(value = "/error")
-    public ModelAndView renderErrorPage(HttpServletRequest httpRequest) {
-        ModelAndView errorPage = new ModelAndView("error");//
-        String message = "";
-        int httpErrorCode = getErrorCode(httpRequest);
-
-        switch (httpErrorCode) {
-            case 400: {
-                message = "Bad Request";
-                break;
+        //reference : https://www.baeldung.com/spring-boot-custom-error-page
+        //error this request mapping is referencing the one on the web.xml
+        @GetMapping(value = "/error")
+        public ModelAndView renderErrorPage(HttpServletRequest httpRequest) {
+            ModelAndView errorPage = new ModelAndView("error");
+            String errorMessage;
+            int httpErrorCode = getErrorCode(httpRequest);
+            switch (httpErrorCode) {
+                case 400 -> errorMessage = "Bad Request";
+                case 401 -> errorMessage = "Unauthorized";
+                case 404 -> errorMessage = "Resource not found";
+                default -> errorMessage = "Ops something went wrong...";
             }
-            case 401: {
-                message = "Unauthorized";
-                break;
-            }
-            case 404: {
-                message = "Resource not found";
-                break;
-            }
-            case 500: {
-                message = "Internal Server Error";
-                break;
-            }
+            errorPage.addObject("errorCode", httpErrorCode);
+            errorPage.addObject("message", errorMessage);
+            return errorPage;
         }
-        errorPage.addObject("message", message);
-        return errorPage;
-    }
-
-    private int getErrorCode(HttpServletRequest httpRequest) {
-        return (Integer) httpRequest.getAttribute("jakarta.servlet.error.status_code");
-    }
+        private int getErrorCode(HttpServletRequest httpRequest) {
+            return (Integer) httpRequest.getAttribute("jakarta.servlet.error.status_code");
+        }
 }

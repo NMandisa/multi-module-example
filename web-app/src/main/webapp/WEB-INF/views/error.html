@@ -6,8 +6,8 @@
 <!--Navigation HTML-->
 <body>
 <div class="container">
-    <h1>General Error</h1>
-    <h3  th:text="${message}"></h3>
+    <h1>Error <span th:text="${errorCode}"></span></h1>
+    <h3 th:text="${message}"></h3>
 </div>
 </body>
 <!--Footer HTML-->
