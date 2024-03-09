@@ -1,5 +1,8 @@
 package za.co.mnjonjo.rest.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +27,24 @@ import java.util.LinkedHashMap;
 @CrossOrigin(allowedHeaders = {"*"}, origins = "*")
 @RestController
 @RequestMapping(RestURIConstants.TESTS_REST_MAPPING)
+@Tag(name = "Test")
 public class TestRestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TestRestController.class.getName());
     private final @NonNull TestService testService;
+    @Operation(
+            description = "Get endpoint for Test ",
+            summary = "This is a summary for student management get endpoint list test",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized",
+                            responseCode = "403"
+                    )
+            }
+    )
     @GetMapping(value = RestURIConstants.GET_ALL_TESTS, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<GenericRestResponse> list (){
         GenericRestResponse restResponse = new GenericRestResponse(new LinkedHashMap<>());

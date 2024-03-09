@@ -1,4 +1,4 @@
-package za.co.mnjonjo.rest.exception;
+package za.co.mnjonjo.rest.handler;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

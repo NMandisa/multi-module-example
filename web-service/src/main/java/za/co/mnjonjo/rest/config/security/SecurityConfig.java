@@ -1,4 +1,4 @@
-package za.co.mnjonjo.rest.config;
+package za.co.mnjonjo.rest.config.security;
 
 /**
  * @author Noxolo.Mkhungo
