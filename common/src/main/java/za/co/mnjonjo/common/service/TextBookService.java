@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-import za.co.mnjonjo.common.facade.TestFacade;
-import za.co.mnjonjo.core.entity.Test;
+import za.co.mnjonjo.common.facade.TextBookFacade;
+import za.co.mnjonjo.core.entity.TextBook;
 
 import java.util.List;
 
@@ -17,10 +17,10 @@ import java.util.List;
 @Service
 @Scope("singleton")
 @RequiredArgsConstructor
-public class TestService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestService.class.getName());
-    private final @NonNull TestFacade testFacade;
-    public List<Test> testList(){
-        return testFacade.getALlTests();
+public class TextBookService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TextBookService.class.getName());
+    private final @NonNull TextBookFacade textBookFacade;
+    public List<TextBook> textBooks(){
+        return textBookFacade.getALlTextBooks();
     }
 }

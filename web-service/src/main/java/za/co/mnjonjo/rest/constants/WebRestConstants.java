@@ -1,4 +1,4 @@
-package za.co.mnjonjo.rest.constant;
+package za.co.mnjonjo.rest.constants;
 
 /**
  * @author Noxolo.Mkhungo

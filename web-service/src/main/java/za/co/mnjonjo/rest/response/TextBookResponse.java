@@ -3,4 +3,4 @@ package za.co.mnjonjo.rest.response;
 /**
  * @author Noxolo.Mkhungo
  */
-public record TestResponse(String name) {}
+public record TextBookResponse(String textBookSubject) {}

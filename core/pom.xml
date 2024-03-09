@@ -113,6 +113,7 @@
       <artifactId>jakarta.el-api</artifactId>
       <version>6.0.0-M1</version>
     </dependency>
+
     <!--END SPRING ORM Hibernate Connection Pooling Dependencies-->
   </dependencies>
 
@@ -131,6 +132,28 @@
       </testResource>
     </testResources>
   </build>
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <name>environment</name>
+        <value>dev</value>
+        <spring.profiles.active>dev</spring.profiles.active>
+        <maven.test.skip>false</maven.test.skip>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <name>environment</name>
+        <value>prod</value>
+        <spring.profiles.active>prod</spring.profiles.active>
+      </properties>
+    </profile>
+  </profiles>
   <developers>
     <developer>
       <id>NMMkhungo</id>

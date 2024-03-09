@@ -9,6 +9,9 @@
         <mapping-file>orm.xml</mapping-file>
         <properties>
             <property name="hibernate.session_factory_name" value="multi-module-session-factory"/>
+            <property name="hibernate.current_session_context_class" value="jta"/>
+            <property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.spi.JtaPlatform"/>
+            <property name="hibernate.transaction.jta.platform_resolver" value="org.hibernate.engine.transaction.jta.platform.spi.JtaPlatformResolver"/>
             <property name="connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
         </properties>
     </persistence-unit>

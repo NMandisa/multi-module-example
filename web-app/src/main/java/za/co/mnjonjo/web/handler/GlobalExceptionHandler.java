@@ -1,4 +1,4 @@
-package za.co.mnjonjo.web.exception;
+package za.co.mnjonjo.web.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

@@ -7,7 +7,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-import za.co.mnjonjo.common.service.TestService;
+import za.co.mnjonjo.common.service.TextBookService;
 
 /**
  * @author Noxolo.Mkhungo
@@ -17,7 +17,7 @@ import za.co.mnjonjo.common.service.TestService;
 public class HomePageController {
     private static final Logger LOGGER = LoggerFactory.getLogger(HomePageController.class.getName());
 
-    private final @NonNull TestService testService;
+    private final @NonNull TextBookService textBookService;
     @GetMapping
     public ModelAndView index (){
         return new ModelAndView("index");

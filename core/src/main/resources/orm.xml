@@ -3,7 +3,7 @@
                  version="3.0">
     <package>za.co.mnjonjo.core.entity</package>
     <!--Reference Purposes -->
-        <!--<entity class="za.co.mnjonjo.core.entity.Test" name="Test">
+        <!--<entity class="za.co.mnjonjo.core.entity.TextBook" name="Test">
             <named-native-query name="myQuery" result-set-mapping="ages">
                 <query>Query here</query>
             </named-native-query>

@@ -11,12 +11,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
-import za.co.mnjonjo.common.service.TestService;
-import za.co.mnjonjo.rest.constant.RestURIConstants;
-import za.co.mnjonjo.rest.constant.WebRestConstants;
-import za.co.mnjonjo.rest.dto.TestDTO;
+import za.co.mnjonjo.common.service.TextBookService;
+import za.co.mnjonjo.rest.constants.TextBookRestURIConstants;
+import za.co.mnjonjo.rest.constants.WebRestConstants;
+import za.co.mnjonjo.rest.dto.TextBookDTO;
 import za.co.mnjonjo.rest.response.GenericRestResponse;
-import za.co.mnjonjo.rest.response.TestResponse;
+import za.co.mnjonjo.rest.response.TextBookResponse;
 import za.co.mnjonjo.rest.response.enums.Status;
 
 import java.util.LinkedHashMap;
@@ -26,14 +26,14 @@ import java.util.LinkedHashMap;
 @RequiredArgsConstructor
 @CrossOrigin(allowedHeaders = {"*"}, origins = "*")
 @RestController
-@RequestMapping(RestURIConstants.TESTS_REST_MAPPING)
+@RequestMapping(TextBookRestURIConstants.TEXTBOOKS_REST_MAPPING)
 @Tag(name = "Test")
-public class TestRestController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestRestController.class.getName());
-    private final @NonNull TestService testService;
+public class TextBookRestController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TextBookRestController.class.getName());
+    private final @NonNull TextBookService textBookService;
     @Operation(
-            description = "Get endpoint for Test ",
-            summary = "This is a summary for student management get endpoint list test",
+            description = "Get endpoint for TextBook ",
+            summary = "This is a summary for student management get endpoint list textbooks",
             responses = {
                     @ApiResponse(
                             description = "Success",
@@ -45,34 +45,34 @@ public class TestRestController {
                     )
             }
     )
-    @GetMapping(value = RestURIConstants.GET_ALL_TESTS, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = TextBookRestURIConstants.GET_ALL_TEXTBOOKS, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<GenericRestResponse> list (){
         GenericRestResponse restResponse = new GenericRestResponse(new LinkedHashMap<>());
         restResponse.response().put(WebRestConstants.STATUS, Status.SUCCESS.getCode());
-        restResponse.response().put("tests",testService.testList());
+        restResponse.response().put("textbooks", textBookService.textBooks());
         return new ResponseEntity<>(restResponse,null, HttpStatus.ACCEPTED);
     }
-    @PostMapping(value = RestURIConstants.CREATE_TEST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+    @PostMapping(value = TextBookRestURIConstants.CREATE_TEXTBOOK, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
     produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity <GenericRestResponse> create(@RequestBody TestDTO testDTO){
+    public ResponseEntity <GenericRestResponse> create(@RequestBody TextBookDTO textBookDTO){
         GenericRestResponse restResponse = new GenericRestResponse(new LinkedHashMap<>());
         restResponse.response().put(WebRestConstants.STATUS,Status.SUCCESS.getCode());
-        restResponse.response().put("message","test created");
-        restResponse.response().put("test", new TestResponse(testDTO.getName()));
+        restResponse.response().put("message","textbook created");
+        restResponse.response().put("textbook", new TextBookResponse(textBookDTO.getName()));
         return new ResponseEntity<>(restResponse,null, HttpStatus.CREATED);
     }
-    @PostMapping(value = RestURIConstants.GET_TEST,produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<GenericRestResponse> getTestById(@PathVariable("test-id") Long testId){
+    @PostMapping(value = TextBookRestURIConstants.GET_TEXTBOOK,produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<GenericRestResponse> getTestById(@PathVariable("id") Long testId){
         GenericRestResponse restResponse = new GenericRestResponse(new LinkedHashMap<>());
         restResponse.response().put(WebRestConstants.STATUS,Status.SUCCESS.getCode());
-        restResponse.response().put("test","tests-specific-test-using-id");
+        restResponse.response().put("textbook","textbook-specific-textbook-using-id");
         return new ResponseEntity<>(restResponse,null, HttpStatus.OK);
     }
-    @DeleteMapping(value = RestURIConstants.DELETE_TEST,produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<GenericRestResponse> remove(@PathVariable("test-id") Long testId){
+    @DeleteMapping(value = TextBookRestURIConstants.DELETE_TEXTBOOK,produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<GenericRestResponse> remove(@PathVariable("id") Long textBookId){
         GenericRestResponse restResponse = new GenericRestResponse(new LinkedHashMap<>());
         restResponse.response().put(WebRestConstants.STATUS,Status.SUCCESS.getCode());
-        restResponse.response().put("delete","delete-test");
+        restResponse.response().put("delete","delete-textbook");
         return new ResponseEntity<>(restResponse,null, HttpStatus.ACCEPTED);
     }
 }

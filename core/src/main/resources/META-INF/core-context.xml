@@ -60,4 +60,5 @@
 
     <!--<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
     </bean>-->
+
 </beans>

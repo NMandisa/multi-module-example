@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestDTO {
+public class TextBookDTO {
     private String name;
 }
