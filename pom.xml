@@ -240,13 +240,13 @@
                     <version>2.5.0</version>
                     <configuration>
                         <from>
-                            <image>grc.io/multi-module-demo/${name}</image>
+                            <image>grc.io/multi-module-demo/${project.name}</image>
                         </from>
                         <to>
-                            <image>${name}/${project.artifactId}:${project.version}</image>
+                            <image>${project.name}/${project.artifactId}:${project.version}</image>
                         </to>
                         <container>
-                            <mainClass>za.co.mnjonjo.core.App</mainClass>
+                            <!--<mainClass>za.co.mnjonjo.core.App</mainClass>-->
                             <ports>
                                 <port>8080</port>
                                 <port>8787</port>

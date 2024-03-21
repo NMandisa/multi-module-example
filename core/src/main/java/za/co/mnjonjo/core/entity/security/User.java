@@ -3,6 +3,7 @@ package za.co.mnjonjo.core.entity.security;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import za.co.mnjonjo.core.entity.AbstractBase;
 
 /**
  * @author Noxolo.Mkhungo
@@ -10,10 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
-    @SequenceGenerator(name = "user_generator", sequenceName = "sequence_user_id")
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+@Table(name = "user")
+@AttributeOverride(name="id", column=@Column(name="user_id"))
+public class User extends AbstractBase {
 }

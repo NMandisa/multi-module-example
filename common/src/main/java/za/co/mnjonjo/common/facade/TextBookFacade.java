@@ -4,6 +4,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import za.co.mnjonjo.core.entity.TextBook;
@@ -16,9 +17,12 @@ import java.util.List;
  */
 @Component
 @Scope("singleton")
-@RequiredArgsConstructor
 public class TextBookFacade {
     private static final Logger LOGGER = LoggerFactory.getLogger(TextBookFacade.class.getName());
-    private final @NonNull TextBookRepository textBookRepository;
-    public List<TextBook> getALlTextBooks(){return textBookRepository.findAll();}
+    private final TextBookRepository textBookRepository;
+    @Autowired
+    public TextBookFacade(TextBookRepository textBookRepository){
+        this.textBookRepository=textBookRepository;
+    }
+    public List<TextBook> getALLTextBooks(){return textBookRepository.findAll();}
 }

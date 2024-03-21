@@ -3,6 +3,8 @@ package za.co.mnjonjo.core.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.solr.core.mapping.Indexed;
 
 import java.io.Serializable;
 
@@ -13,12 +15,10 @@ import java.io.Serializable;
 @Getter
 @Entity
 @Table(name = "text_books")
-public class TextBook implements Serializable {
-    @Id
-    @Column(name = "text_book_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "text_book_id_generator")
-    @SequenceGenerator(name = "text_book_id_generator", sequenceName = "text_book_id_sequence", allocationSize = 1)
-    private Long textBookId;
+@AttributeOverride(name="id", column=@Column(name="text_book_id"))
+public class TextBook extends AbstractBase implements Serializable {
+    @Field
+    @Indexed(name = "subject", type = "string")
     @Column(name ="text_book_subject")
     private String textBookSubject;
 }

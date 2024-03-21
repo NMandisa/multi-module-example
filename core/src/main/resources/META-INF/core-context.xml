@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ~ Copyright (c) 2023. ~ Author : Noxolo.Mkhungo | +27(0)71 741 6469 -->
+<!-- ~ Copyright (c) 2024. ~ Author : Noxolo.Mkhungo | +27(0)71 741 6469 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:solr="http://www.springframework.org/schema/data/solr"
        xsi:schemaLocation="
     http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/data/jpa
     https://www.springframework.org/schema/data/jpa/spring-jpa.xsd
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context.xsd">
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/data/solr
+    https://www.springframework.org/schema/data/solr/spring-solr.xsd">
 
     <context:annotation-config/>
     <context:component-scan base-package="za.co.mnjonjo.core"/>
-    <context:property-placeholder location="classpath:./core.properties"/>
+    <context:property-placeholder location="classpath:core.properties"/>
     <context:component-scan base-package="za.co.mnjonjo.core.repository">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
     </context:component-scan>
+    <solr:repositories base-package="za.co.mnjonjo.core.repository" schema-creation-support="true"/>
     <jpa:repositories base-package="za.co.mnjonjo.core.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager"/>
+    <!--<jpa:auditing auditor-aware-ref="myAuditorAwareBean" /> To Do-->
+
+    <solr:solr-client id="solrClient" url="https://locahost:8983/solr" />
+    <bean id="SolrTemplate" class="org.springframework.data.solr.core.SolrTemplate" >
+        <constructor-arg ref="solrClient"/>
+    </bean>
 
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"  destroy-method="close">
         <constructor-arg ref="hikariConfig" />
@@ -57,7 +67,6 @@
     </bean>
 
     <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-
     <!--<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
     </bean>-->
 
