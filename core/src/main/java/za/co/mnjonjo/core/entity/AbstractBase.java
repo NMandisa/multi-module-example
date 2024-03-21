@@ -10,10 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-public class AbstractBase {
+public abstract class AbstractBase {
     @Id
     @SequenceGenerator(name = "id_generator", sequenceName = "sequence_id", allocationSize = 10, initialValue = 201)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
     @Column(name = "id")
-    private long id;
+    protected long id;
 }

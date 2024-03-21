@@ -115,11 +115,17 @@
     </dependency>
     <!--END SPRING ORM Hibernate Connection Pooling Dependencies-->
 
-    <!--START SOLR DEPENDENCIES-->
+    <!--START ELASTIC SEARCH DEPENDENCIES-->
     <dependency>
       <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-solr</artifactId>
-      <version>4.3.14</version>
+      <artifactId>spring-data-elasticsearch</artifactId>
+      <version>5.2.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>transport</artifactId>
+      <version>7.17.18</version>
     </dependency>
 
     <dependency>
@@ -127,7 +133,7 @@
       <artifactId>spring-data-commons</artifactId>
       <version>3.2.4</version>
     </dependency>
-    <!--END SOLR DEPENDENCIES-->
+    <!--END ELASTIC SEARCH  DEPENDENCIES-->
   </dependencies>
 
   <build>

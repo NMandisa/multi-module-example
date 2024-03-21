@@ -3,8 +3,10 @@ package za.co.mnjonjo.core.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.solr.client.solrj.beans.Field;
-import org.springframework.data.solr.core.mapping.Indexed;
+
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
@@ -15,10 +17,12 @@ import java.io.Serializable;
 @Getter
 @Entity
 @Table(name = "text_books")
-@AttributeOverride(name="id", column=@Column(name="text_book_id"))
+@Document(indexName = "text_book_index")
 public class TextBook extends AbstractBase implements Serializable {
-    @Field
-    @Indexed(name = "subject", type = "string")
+
+    @AttributeOverride(name="id", column=@Column(name="text_book_id"))
+
+    @Field(type = FieldType.Text, name = "text_book_subject")
     @Column(name ="text_book_subject")
     private String textBookSubject;
 }
