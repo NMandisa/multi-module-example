@@ -1,0 +1,142 @@
+plugins {
+    id 'java'
+}
+
+java{
+    withSourcesJar()
+    withJavadocJar()
+}
+
+allprojects {
+    version = '1.0-SNAPSHOT'
+    group = 'za.co.mnjonjo'
+}
+subprojects {
+    apply plugin :'java'
+    apply plugin :'maven-publish'
+
+    java{
+        withSourcesJar()
+        withJavadocJar()
+    }
+
+    publishing{
+        publications {
+            myPublication(MavenPublication){
+               /* groupId project.group
+                artifactId project.name
+                version project.version
+                from components.java*/
+                groupId project.group
+                artifactId project.name
+                version project.version
+                from components.java
+                //artifactId sourceJar
+                pom {
+                    name = "multi-module-demo"
+                    description = ""
+                    url = ""
+                    licenses {
+                        license {
+                            name = ""
+                            url = ""
+                        }
+                    }
+                }
+               // developers {
+                    /*developer {
+                        id = "Noxolo.Mkhungo"
+                        name = "Noxolo Mandisa Mkhungo"
+                        email = "mandisamkhungo@live.com"
+                    }*/
+                //}
+
+            }
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    //enable compilation in a separate daemon process
+    options.fork = true
+    // JDK 17
+    sourceCompatibility = 17
+    targetCompatibility = 17
+}
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.springframework:spring-context:6.1.0') {
+        exclude module: 'commons-logging'
+    }
+    implementation(group: 'org.springframework', name: 'spring-core', version: '6.1.0') {
+        exclude(module: 'commons-logging')
+    }
+    implementation(group: 'org.springframework', name: 'spring-context', version: '6.1.0') {
+        exclude(module: 'commons-logging')
+    }
+    implementation(group: 'org.springframework', name: 'spring-beans', version: '6.1.0') {
+        exclude(module: 'commons-logging')
+    }
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
+    implementation(group: 'log4j', name: 'log4j', version: '2.20.0') {
+        exclude(module: 'mail')
+        exclude(module: 'jms')
+        exclude(module: 'jmxtools')
+        exclude(module: 'jmxri')
+    }
+    implementation group: 'org.slf4j', name: 'jcl-over-slf4j', version: '2.0.7'
+    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '2.0.7'
+    implementation group: 'org.mockito', name: 'junit-jupiter', version: '5.8.0'
+    implementation group: 'org.junit.jupiter', name: 'jupiter-api', version: '5.10.0'
+}
+
+/*
+test {
+    // discover and execute JUnit4-based tests
+    useJUnit()
+
+    // discover and execute TestNG-based tests
+    useTestNG()
+
+    // discover and execute JUnit Platform-based tests
+    useJUnitPlatform()
+
+   */
+/* // set a system property for the test JVM(s)
+    systemProperty 'some.prop', 'value'
+
+    // explicitly include or exclude tests
+    include 'org/foo/**'
+    exclude 'org/boo/**'*//*
+
+
+    // show standard out and standard error of the test JVM(s) on the console
+    testLogging.showStandardStreams = true
+
+    // set heap size for the test JVM(s)
+    minHeapSize = "128m"
+    maxHeapSize = "512m"
+
+    // set JVM arguments for the test JVM(s)
+    jvmArgs '-XX:MaxPermSize=256m'
+
+    // listen to events in the test execution lifecycle
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+
+    // fail the 'test' task on the first test failure
+    failFast = true
+    // skip an actual test execution
+    dryRun = true
+    // listen to standard out and standard error of the test JVM(s)
+    onOutput { descriptor, event ->
+        logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
+    }
+}*/
