@@ -11,8 +11,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <jvm.options>-Xmx256M</jvm.options>
         <spring.security.version>6.1.5</spring.security.version>
         <spring.version>6.1.0</spring.version>
         <slf4j.version>2.0.7</slf4j.version>
@@ -208,6 +209,7 @@
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
+                    <!--<compilerArgs>${jvm.options}</compilerArgs>-->
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -234,7 +236,28 @@
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
-                <!--<plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>java</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <executable>java</executable>
+                        <!--<arguments>
+                            <argument>-Dhttp.proxyHost=myproxy.example.com</argument>
+                            <argument>-Dhttp.proxyPort=8080</argument>
+                            <argument>-classpath</argument>
+                            <classpath />
+                            <argument>com.example.Main</argument>
+                        </arguments>-->
+                    </configuration>
+                </plugin>
+               <plugin>
                     <groupId>com.google.cloud.tools</groupId>
                     <artifactId>jib-maven-plugin</artifactId>
                     <version>2.5.0</version>
@@ -246,7 +269,7 @@
                             <image>${project.name}/${project.artifactId}:${project.version}</image>
                         </to>
                         <container>
-                            &lt;!&ndash;<mainClass>za.co.mnjonjo.core.App</mainClass>&ndash;&gt;
+                            <!--<mainClass>za.co.mnjonjo.core.App</mainClass>-->
                             <ports>
                                 <port>8080</port>
                                 <port>8787</port>
@@ -261,7 +284,7 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>-->
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

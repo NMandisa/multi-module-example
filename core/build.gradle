@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+}
+
+java{
+    withSourcesJar()
+    withJavadocJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    //enable compilation in a separate daemon process
+    options.fork = true
+    // JDK 17
+    sourceCompatibility = 21
+    targetCompatibility = 21
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.springframework:spring-orm:6.1.0') {
+        exclude module: 'commons-logging'
+    }
+    implementation(group: 'org.springframework.data', name: 'spring-data-jpa', version: '3.2.0') {
+        exclude(module: 'commons-logging')
+    }
+    implementation(group: 'org.springframework', name: 'spring-context', version: '6.1.0') {
+        exclude(module: 'commons-logging')
+    }
+    implementation(group: 'org.springframework', name: 'spring-beans', version: '6.1.0') {
+        exclude(module: 'commons-logging')
+    }
+
+    implementation(group: 'org.hibernate', name: 'hibernate-core-jakarta', version: '5.6.15.Final')
+    implementation(group: 'org.hibernate', name: 'hibernate-hikaricp', version: '5.6.15.Final')
+    implementation(group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.6.15.Final')
+    implementation(group: 'org.hibernate.validator', name: 'hibernate-validator', version: '8.0.1.Final')
+
+    implementation(group: 'jakarta.transaction', name: 'jakarta.transaction-api', version: '2.0.1')
+    implementation(group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.1.0')
+    implementation(group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '4.0.1')
+    implementation(group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2')
+    implementation(group: 'jakarta.el', name: 'jakarta.el-api', version: '6.0.0-M1')
+
+    runtimeOnly(group: 'com.mysql', name: 'mysql-connector-j', version: '8.2.0')
+
+    implementation(group: 'org.springframework.data', name: 'spring-data-elasticsearch', version: '5.2.4')
+    implementation(group: 'org.elasticsearch.client', name: 'transport', version: '7.17.18')
+    implementation(group: 'org.springframework.data', name: 'spring-data-commons', version: '3.2.4')
+    
+    /*implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.30'*/
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+    
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.1'
+    testImplementation("org.springframework:spring-test:6.1.1")
+    
+}

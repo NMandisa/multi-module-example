@@ -34,7 +34,7 @@ import java.util.List;
     @Test
      void testSave() {
         TextBook textBook = new TextBook();
-        textBook.setTextBookSubject("Computer Application Technology");
+        //textBook.setTextBookSubject("Computer Application Technology");
         textBookRepository.save(textBook);
         List<TextBook> result = textBookRepository.findAll();
         Assertions.assertTrue(result.contains(textBook));

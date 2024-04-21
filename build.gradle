@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'idea'
+    id 'eclipse'
 }
 
 java{
@@ -8,11 +10,15 @@ java{
 }
 
 allprojects {
-    version = '1.0-SNAPSHOT'
     group = 'za.co.mnjonjo'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '21'
 }
+
 subprojects {
     apply plugin :'java'
+    apply plugin :'idea'
+    apply plugin :'eclipse'
     apply plugin :'maven-publish'
 
     java{
@@ -43,25 +49,29 @@ subprojects {
                         }
                     }
                 }
-               // developers {
-                    /*developer {
+              /* // developers {
+                    *//*developer {
                         id = "Noxolo.Mkhungo"
                         name = "Noxolo Mandisa Mkhungo"
                         email = "mandisamkhungo@live.com"
-                    }*/
-                //}
+                    }*//*
+                //}*/
 
             }
         }
     }
 }
 
+//task.outputs.cacheIf { true }
+
 tasks.withType(JavaCompile).configureEach {
     //enable compilation in a separate daemon process
     options.fork = true
-    // JDK 17
-    sourceCompatibility = 17
-    targetCompatibility = 17
+    // JDK 21
+    sourceCompatibility = 21
+    targetCompatibility = 21
+    /*sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17*/
 }
 
 
@@ -84,7 +94,7 @@ dependencies {
         exclude(module: 'commons-logging')
     }
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
-    implementation(group: 'log4j', name: 'log4j', version: '2.20.0') {
+    implementation(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0') {
         exclude(module: 'mail')
         exclude(module: 'jms')
         exclude(module: 'jmxtools')
@@ -94,9 +104,18 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '2.0.7'
     implementation group: 'org.mockito', name: 'junit-jupiter', version: '5.8.0'
     implementation group: 'org.junit.jupiter', name: 'jupiter-api', version: '5.10.0'
+
+    /*implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.30'*/
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+
+
 }
 
-/*
 test {
     // discover and execute JUnit4-based tests
     useJUnit()
@@ -107,13 +126,12 @@ test {
     // discover and execute JUnit Platform-based tests
     useJUnitPlatform()
 
-   */
-/* // set a system property for the test JVM(s)
-    systemProperty 'some.prop', 'value'
+ 	//set a system property for the test JVM(s)
+    //systemProperty 'some.prop', 'value'
 
     // explicitly include or exclude tests
     include 'org/foo/**'
-    exclude 'org/boo/**'*//*
+    exclude 'org/boo/**'
 
 
     // show standard out and standard error of the test JVM(s) on the console
@@ -139,4 +157,45 @@ test {
     onOutput { descriptor, event ->
         logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
     }
+}
+
+
+
+idea.module.iml {
+    beforeMerged { module ->
+        module.dependencies.clear()
+    }
+    whenMerged { module ->
+        module.dependencies*.exported = true
+    }
+}
+idea.project.ipr {
+    beforeMerged { project ->
+        project.modulePaths.clear()
+    }
+    withXml { provider ->
+        provider.node.component
+                .find { it.@name == 'VcsDirectoryMappings' }
+                .mapping.@vcs = 'Git'
+    }
+}
+
+
+
+/*sourceSets {
+    intTest {
+        java {
+            srcDirs = ['src/integration']
+        }
+    }
+}
+
+idea {
+    module {
+        testSources.from(sourceSets.intTest.java.srcDirs)
+    }
 }*/
+
+
+
+
