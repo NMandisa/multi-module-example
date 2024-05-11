@@ -20,6 +20,15 @@
         <log4j.version>2.20.0</log4j.version>
         <junit.version>5.10.1</junit.version>
         <mockito.junit.version>5.8.0</mockito.junit.version>
+        <!-- JaCoCo Properties -->
+        <jacoco.version>0.8.12</jacoco.version>
+        <!-- Sonar Properties -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.exclusions>src/**/tests/**/*</sonar.exclusions>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.language>java</sonar.language>
+        <sonar.dynamic>reuseReports</sonar.dynamic>
     </properties>
 
     <modules>
@@ -281,6 +290,27 @@
                             <phase>package</phase>
                             <goals>
                                 <goal>dockerBuild</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- JaCoCo Plugin -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                    <executions>
+                        <execution>
+                            <id>jacoco-initialize</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>jacoco-site</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>report</goal>
                             </goals>
                         </execution>
                     </executions>
