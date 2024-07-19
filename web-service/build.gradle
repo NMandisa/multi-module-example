@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'war'
+    //id 'maven'
+}
+
+
+description = 'web-service'
+group = 'za.co.mnjonjo.rest'
+
+java{
+    withSourcesJar()
+    withJavadocJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    //enable compilation in a separate daemon process
+    options.fork = true
+}
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+ dependencies {
+  	implementation project(':core')
+    implementation project(':common')
+    
+    implementation (group: 'org.springframework', name: 'spring-webmvc', version:'6.1.0'){
+        exclude module: 'commons-logging'}
+        
+    implementation (group: 'org.springdoc', name: 'springdoc-openapi-ui', version:'1.7.0'){
+    	exclude module: 'org.springframework.boot:spring-boot-autoconfigure'
+    }
+    implementation (group: 'org.springframework', name: 'spring-webmvc', version:'6.1.0')    
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+} 
