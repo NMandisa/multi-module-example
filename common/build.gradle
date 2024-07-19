@@ -1,5 +1,7 @@
 plugins {
-    id 'application'
+    id 'java'
+    id 'idea'
+    id 'eclipse'
 }
 
 java{
@@ -21,7 +23,7 @@ repositories {
 dependencies {
 	implementation project (':core')
 
-    implementation('org.springframework:spring-orm:6.1.0') {
+    /*implementation('org.springframework:spring-orm:6.1.0') {
         exclude module: 'commons-logging'
     }
     implementation(group: 'org.springframework.data', name: 'spring-data-jpa', version: '3.2.0') {
@@ -50,5 +52,7 @@ dependencies {
 
     implementation(group: 'org.springframework.data', name: 'spring-data-elasticsearch', version: '5.2.4')
     implementation(group: 'org.elasticsearch.client', name: 'transport', version: '7.17.18')
-    implementation(group: 'org.springframework.data', name: 'spring-data-commons', version: '3.2.4')
+    implementation(group: 'org.springframework.data', name: 'spring-data-commons', version: '3.2.4'){
+        exclude(module: 'commons-logging')
+    }*/
 }

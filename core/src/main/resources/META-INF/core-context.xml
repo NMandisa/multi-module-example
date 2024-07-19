@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ~ Copyright (c) 2024. ~ Author : Noxolo.Mkhungo | +27(0)71 741 6469 -->
+<!-- ~ Copyright (c) 2023 - 2024. ~ Author : Noxolo.Mkhungo | +27(0)71 741 6469 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -18,11 +18,11 @@
     <context:annotation-config/>
     <context:component-scan base-package="za.co.mnjonjo.core"/>
     <context:property-placeholder location="classpath:core.properties"/>
-    <context:component-scan base-package="za.co.mnjonjo.core.repository">
+    <!--<context:component-scan base-package="za.co.mnjonjo.core.repository">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
-    </context:component-scan>
+    </context:component-scan>-->
 
-    <elasticsearch:repositories base-package="za.co.mnjonjo.core.elasticsearch.repository" />
+    <!--<elasticsearch:repositories base-package="za.co.mnjonjo.core.elasticsearch.repository" /-->>
     <!--<elasticsearch:transport-client id="elasticsearch-node" cluster-nodes="localhost:9200"/>-->
 
    <!-- <solr:repositories base-package="za.co.mnjonjo.core.repository" schema-creation-support="true"/>-->
