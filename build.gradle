@@ -12,7 +12,10 @@ java{
 allprojects {
     group = 'za.co.mnjonjo'
     version = '0.0.1-SNAPSHOT'
-    sourceCompatibility = '21'
+
+    repositories {
+        mavenCentral()
+    }
 }
 
 subprojects {
@@ -24,6 +27,50 @@ subprojects {
     java{
         withSourcesJar()
         withJavadocJar()
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation('org.springframework:spring-context:6.1.0') {
+            exclude module: 'commons-logging'
+        }
+        implementation(group: 'org.springframework', name: 'spring-core', version: '6.1.0') {
+            exclude(module: 'commons-logging')
+        }
+        implementation(group: 'org.springframework', name: 'spring-context', version: '6.1.0') {
+            exclude(module: 'commons-logging')
+        }
+        implementation(group: 'org.springframework', name: 'spring-beans', version: '6.1.0') {
+            exclude(module: 'commons-logging')
+        }
+        implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
+        implementation(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0') {
+            exclude(module: 'mail')
+            exclude(module: 'jms')
+            exclude(module: 'jmxtools')
+            exclude(module: 'jmxri')
+        }
+        implementation group: 'org.slf4j', name: 'jcl-over-slf4j', version: '2.0.7'
+        implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '2.0.7'
+       // testImplementation group: 'org.mockito', name: 'junit-jupiter', version: '5.8.0'
+       // testImplementation group: 'org.junit.jupiter', name: 'jupiter-api', version: '5.10.0'
+
+        implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
+        compileOnly 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+        testCompileOnly 'org.projectlombok:lombok:1.18.30'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+        testCompileOnly 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+        testCompileOnly 'org.mockito:mockito-core:5.10.0'
+        testCompileOnly 'org.mockito:mockito-junit-jupiter:5.10.0'
+
+
+
+
     }
 
     publishing{
@@ -70,52 +117,10 @@ tasks.withType(JavaCompile).configureEach {
     // JDK 21
     sourceCompatibility = 21
     targetCompatibility = 21
-    /*sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17*/
 }
 
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-
-dependencies {
-    implementation('org.springframework:spring-context:6.1.0') {
-        exclude module: 'commons-logging'
-    }
-    implementation(group: 'org.springframework', name: 'spring-core', version: '6.1.0') {
-        exclude(module: 'commons-logging')
-    }
-    implementation(group: 'org.springframework', name: 'spring-context', version: '6.1.0') {
-        exclude(module: 'commons-logging')
-    }
-    implementation(group: 'org.springframework', name: 'spring-beans', version: '6.1.0') {
-        exclude(module: 'commons-logging')
-    }
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
-    implementation(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0') {
-        exclude(module: 'mail')
-        exclude(module: 'jms')
-        exclude(module: 'jmxtools')
-        exclude(module: 'jmxri')
-    }
-    implementation group: 'org.slf4j', name: 'jcl-over-slf4j', version: '2.0.7'
-    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '2.0.7'
-    implementation group: 'org.mockito', name: 'junit-jupiter', version: '5.8.0'
-    implementation group: 'org.junit.jupiter', name: 'jupiter-api', version: '5.10.0'
-
-    /*implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.30'*/
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
-
-    testCompileOnly 'org.projectlombok:lombok:1.18.30'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
-
-
-
-}
-
+/*
 test {
     // discover and execute JUnit4-based tests
     useJUnit()
@@ -158,6 +163,7 @@ test {
         logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
     }
 }
+*/
 
 
 

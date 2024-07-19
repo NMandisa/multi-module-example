@@ -1,12 +1,6 @@
-//apply plugin: 'war'
-//apply plugin: 'java'
-//apply plugin: 'maven'
 plugins {
-    id 'java'
     id 'war'
-    //id 'maven'
 }
-
 
 description = 'web-app'
 group = 'za.co.mnjonjo.web'
@@ -19,14 +13,10 @@ java{
 tasks.withType(JavaCompile).configureEach {
     //enable compilation in a separate daemon process
     options.fork = true
-    // JDK 21
-    sourceCompatibility = 21
-    targetCompatibility = 21
 }
 
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
  dependencies {
@@ -37,28 +27,5 @@ repositories {
         exclude module: 'commons-logging'}
     implementation (group: 'org.springframework', name: 'spring-web', version:'6.1.0'){
     exclude module: 'commons-logging'}
-    implementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version:'6.0.0' 
-    
-    /*implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.30'*/
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
-    
-    //Logger
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
-    implementation(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0') {
-        exclude(module: 'mail')
-        exclude(module: 'jms')
-        exclude(module: 'jmxtools')
-        exclude(module: 'jmxri')
-    }
-    implementation group: 'org.slf4j', name: 'jcl-over-slf4j', version: '2.0.7'
-    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '2.0.7'
-
-    testCompileOnly 'org.projectlombok:lombok:1.18.30'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
-    
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.1'
-    testImplementation("org.springframework:spring-test:6.1.1")
-   
+    compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version:'6.0.0'
 } 
